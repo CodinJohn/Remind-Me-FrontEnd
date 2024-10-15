@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { updateRemind, fetchReminds } from '../../services/remindService';
 
-const EditRemindForm = ({categories}) => {
+const EditRemindForm = ({ categories }) => {
   const { id } = useParams();
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
@@ -15,8 +15,8 @@ const EditRemindForm = ({categories}) => {
   useEffect(() => {
     const fetchRemind = async () => {
       try {
-        const reminds = await fetchReminds(); 
-        const remind = reminds.find(r => r._id === id); 
+        const reminds = await fetchReminds();
+        const remind = reminds.find(r => r._id === id);
         if (remind) {
           setFormData(remind);
           console.log('remind', remind)
@@ -49,12 +49,12 @@ const EditRemindForm = ({categories}) => {
 
   const categoryList = [];
 
-  for(let i=0; i < categories.length; i++){
-    if(categories[i]["_id"] == formData.categoryid){
+  for (let i = 0; i < categories.length; i++) {
+    if (categories[i]["_id"] == formData.categoryid) {
       categoryList.push(
         <option selected={"selected"} value={categories[i]["_id"]}>{categories[i]["name"]}</option>
       )
-    }else{
+    } else {
       categoryList.push(
         <option value={categories[i]["_id"]}>{categories[i]["name"]}</option>
       )
@@ -74,7 +74,7 @@ const EditRemindForm = ({categories}) => {
       </div>
       <div>
         <label>Category:</label>
-        <select name="categoryid" value={ formData.categoryid._id} onChange={handleChange}>
+        <select name="categoryid" value={formData.categoryid._id} onChange={handleChange}>
           {categoryList}
         </select>
       </div>

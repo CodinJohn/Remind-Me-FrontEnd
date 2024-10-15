@@ -5,7 +5,7 @@ import { createRemind } from '../../services/remindService';
 const CreateRemindForm = ({ onRemindCreated, categories }) => {
   const navigate = useNavigate();
   let defaultCategory = 0
-  if (categories.Length > 0){
+  if (categories.Length > 0) {
     defaultCategory = categories[0]["_id"]
   }
   const [formData, setFormData] = useState({
@@ -24,9 +24,9 @@ const CreateRemindForm = ({ onRemindCreated, categories }) => {
       const createdRemind = await createRemind(formData);
       if (onRemindCreated && typeof onRemindCreated === 'function') {
         onRemindCreated(createdRemind);
-      }      
+      }
       setFormData({ title: '', text: '', categoryid: defaultCategory });
-      navigate('/'); 
+      navigate('/');
     } catch (error) {
       console.error('Error creating remind:', error);
     }
@@ -34,7 +34,7 @@ const CreateRemindForm = ({ onRemindCreated, categories }) => {
 
   const categoryList = [];
 
-  for(let i=0; i < categories.length; i++){
+  for (let i = 0; i < categories.length; i++) {
     categoryList.push(
       <option value={categories[i]["_id"]}>{categories[i]["name"]}</option>
     )
@@ -42,7 +42,7 @@ const CreateRemindForm = ({ onRemindCreated, categories }) => {
 
   useEffect(() => {
     setFormData({ title: '', text: '', categoryid: defaultCategory });
-  },[categories]);
+  }, [categories]);
 
 
   return (
