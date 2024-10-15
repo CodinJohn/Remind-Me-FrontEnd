@@ -61,9 +61,3 @@ const signout = () => {
 };
 
 export { signup, signin, getUser, signout };
-
-
-
-
-
-

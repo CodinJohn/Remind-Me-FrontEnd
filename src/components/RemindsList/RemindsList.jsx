@@ -1,4 +1,3 @@
-// src/components/RemindsList/RemindsList.jsx
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { fetchReminds, deleteRemind } from '../../services/remindService';
