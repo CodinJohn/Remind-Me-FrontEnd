@@ -28,14 +28,14 @@ const RemindsList = () => {
 
   return (
     <div>
-      <h2>Remind Me</h2>
+      <h2>Remind Me:</h2>
       {reminds.map(remind => (
         <div key={remind._id}>
-          <h4>{remind.title}</h4>
-          <p>{remind.text}</p>
-          <small>{remind.category}</small>
-          <button onClick={() => handleDelete(remind._id)}>Delete</button>
+          <h4>Title- {remind.title}</h4>
+          <h5>Information- {remind.text}</h5>
+          <h5>Category- {remind.category}</h5>
           <Link to={`/edit-remind/${remind._id}`}><button>Edit</button></Link>
+          <button onClick={() => handleDelete(remind._id)}>Delete</button>
         </div>
       ))}
     </div>
