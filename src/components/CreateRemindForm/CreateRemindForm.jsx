@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { createRemind } from '../../services/remindService';
 
 const CreateRemindForm = ({ onRemindCreated }) => {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     title: '',
     text: '',
@@ -16,8 +18,11 @@ const CreateRemindForm = ({ onRemindCreated }) => {
     e.preventDefault();
     try {
       const createdRemind = await createRemind(formData);
-      onRemindCreated(createdRemind);
+      if (onRemindCreated && typeof onRemindCreated === 'function') {
+        onRemindCreated(createdRemind);
+      }      
       setFormData({ title: '', text: '', category: 'Shopping List' });
+      navigate('/'); 
     } catch (error) {
       console.error('Error creating remind:', error);
     }
