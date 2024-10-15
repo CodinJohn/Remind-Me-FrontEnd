@@ -1,13 +1,17 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { createRemind } from '../../services/remindService';
 
-const CreateRemindForm = ({ onRemindCreated }) => {
+const CreateRemindForm = ({ onRemindCreated, categories }) => {
   const navigate = useNavigate();
+  let defaultCategory = 0
+  if (categories.Length > 0){
+    defaultCategory = categories[0]["_id"]
+  }
   const [formData, setFormData] = useState({
     title: '',
     text: '',
-    category: 'Shopping List',
+    categoryid: defaultCategory,
   });
 
   const handleChange = (e) => {
@@ -21,12 +25,25 @@ const CreateRemindForm = ({ onRemindCreated }) => {
       if (onRemindCreated && typeof onRemindCreated === 'function') {
         onRemindCreated(createdRemind);
       }      
-      setFormData({ title: '', text: '', category: 'Shopping List' });
+      setFormData({ title: '', text: '', categoryid: defaultCategory });
       navigate('/'); 
     } catch (error) {
       console.error('Error creating remind:', error);
     }
   };
+
+  const categoryList = [];
+
+  for(let i=0; i < categories.length; i++){
+    categoryList.push(
+      <option value={categories[i]["_id"]}>{categories[i]["name"]}</option>
+    )
+  };
+
+  useEffect(() => {
+    setFormData({ title: '', text: '', categoryid: defaultCategory });
+  },[categories]);
+
 
   return (
     <form onSubmit={handleSubmit}>
@@ -40,12 +57,8 @@ const CreateRemindForm = ({ onRemindCreated }) => {
       </div>
       <div>
         <label>Category:</label>
-        <select name="category" value={formData.category} onChange={handleChange}>
-          <option value="Shopping List">Shopping List</option>
-          <option value="House Chores">House Chores</option>
-          <option value="Fitness Tracker">Fitness Tracker</option>
-          <option value="Things to not Forget">Things to not Forget</option>
-          <option value="Movies to watch">Movies to watch</option>
+        <select name="categoryid" value={formData.category} onChange={handleChange}>
+          {categoryList}
         </select>
       </div>
       <button type="submit">Add Remind</button>

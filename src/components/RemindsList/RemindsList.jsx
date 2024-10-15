@@ -33,7 +33,7 @@ const RemindsList = () => {
         <div key={remind._id}>
           <h4>Title- {remind.title}</h4>
           <h5>Information- {remind.text}</h5>
-          <h5>Category- {remind.category}</h5>
+          <h5>Category- {remind.categoryid.name}</h5>
           <Link to={`/edit-remind/${remind._id}`}><button>Edit</button></Link>
           <button onClick={() => handleDelete(remind._id)}>Delete</button>
         </div>

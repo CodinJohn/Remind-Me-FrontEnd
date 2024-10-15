@@ -2,13 +2,13 @@ import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { updateRemind, fetchReminds } from '../../services/remindService';
 
-const EditRemindForm = () => {
+const EditRemindForm = ({categories}) => {
   const { id } = useParams();
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     title: '',
     text: '',
-    category: '',
+    categoryid: '',
   });
   const [loading, setLoading] = useState(true);
 
@@ -19,6 +19,7 @@ const EditRemindForm = () => {
         const remind = reminds.find(r => r._id === id); 
         if (remind) {
           setFormData(remind);
+          console.log('remind', remind)
         }
         setLoading(false);
       } catch (error) {
@@ -46,6 +47,21 @@ const EditRemindForm = () => {
 
   if (loading) return <p>Loading...</p>;
 
+  const categoryList = [];
+
+  for(let i=0; i < categories.length; i++){
+    if(categories[i]["_id"] == formData.categoryid){
+      categoryList.push(
+        <option selected={"selected"} value={categories[i]["_id"]}>{categories[i]["name"]}</option>
+      )
+    }else{
+      categoryList.push(
+        <option value={categories[i]["_id"]}>{categories[i]["name"]}</option>
+      )
+    }
+  };
+
+
   return (
     <form onSubmit={handleSubmit}>
       <div>
@@ -58,12 +74,8 @@ const EditRemindForm = () => {
       </div>
       <div>
         <label>Category:</label>
-        <select name="category" value={formData.category} onChange={handleChange}>
-          <option value="Shopping List">Shopping List</option>
-          <option value="House Chores">House Chores</option>
-          <option value="Fitness Tracker">Fitness Tracker</option>
-          <option value="Things to not Forget">Things to not Forget</option>
-          <option value="Movies to watch">Movies to watch</option>
+        <select name="categoryid" value={ formData.categoryid._id} onChange={handleChange}>
+          {categoryList}
         </select>
       </div>
       <button type="submit">Save Changes</button>
