@@ -1,8 +1,35 @@
-# React + Vite
+# Remind-Me
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+# Screenshot of app
+![alt text](<Remind-Me App Photo.png>)
 
-Currently, two official plugins are available:
+# Summary
+Remind Me is a web application where users can create, manage, and explore their reminders! Each user can sign up for an account, log in, create reminders, and edit their reminders. I was inspired to build this app for my Wife who constantly forgets things and refuses to use the Reminder app due to it's "simplicity".
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+# Stretch Goals
+I would love to add animations to each category to make it more interactive along with styling the page a bit better to move the NavBar to the top of the page while keeping the text inside the background photo. 
+
+# Technologies Used
+- Node.js
+- Express
+- MongoDB
+- Mongoose
+- CSS
+- JWT
+- Bootstrap
+- React
+- React Router Dom
+- Vite
+
+
+# Researched
+- Google
+- Youtube
+- CSS-Tricks
+- FreeCodeCamp
+- StackOverFlow
+- Trello
+- Mdn Web Docs
+- CSS Scan
+
+# Backend Repository: https://github.com/CodinJohn/Remind-Me-Backend/tree/main/controllers
